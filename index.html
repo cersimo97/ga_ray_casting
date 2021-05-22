@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <title>Ray casting</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: space-between;
+        height: 100vh;
+        background: black;
+        color: rgba(0, 255, 255, 0.8);
+        font-family: 'Courier New', Courier, monospace;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #explaination {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
+        max-width: 25vw;
+        border-right: 1px solid rgba(0, 255, 255, 0.5);
+      }
+      #stats {
+        width: 700px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center;
+        font-size: large;
+      }
+
+      #stats .stat-value {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      #stats .stat-description {
+        font-size: 0.9rem;
+      }
+
+      .is-small {
+        font-size: 0.75rem;
+      }
+      kbd {
+        line-height: 1.4rem;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 2px;
+      }
+      .key-cmd {
+        min-width: 25%;
+        margin-right: 1rem;
+      }
+      #ga-details {
+        width: 100%;
+      }
+      #ga-details th {
+        width: 40%;
+      }
+      #ga-details * {
+        text-align: start;
+      }
+      #keyboard-shortcuts {
+        display: flex;
+        flex-direction: column;
+      }
+      .keyboard-shortcut {
+        padding: 0.2rem 0;
+        display: flex;
+        align-items: flex-start;
+      }
+      #scroll-explaination {
+        flex: 1;
+        overflow-y: auto;
+      }
+      .footer {
+        margin-top: 1rem;
+        border-top: 1px solid rgba(0, 255, 255, 0.3);
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: rgba(0, 255, 255, 0.3);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="bower_components/chartist/dist/chartist.min.css"
+    />
+    <script src="./scripts/p5.min.js"></script>
+    <script src="./scripts/individual.js"></script>
+    <script src="./scripts/population.js"></script>
+    <script src="./scripts/ga.js"></script>
+    <script src="./scripts/ray.js"></script>
+    <script src="./scripts/boundary.js"></script>
+    <script src="./scripts/detector.js"></script>
+    <script src="./scripts/particle.js"></script>
+    <script src="./scripts/sketch.js"></script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <aside id="explaination">
+      <div id="scroll-explaination">
+        <h1>Ray casting</h1>
+        <p class="is-small">
+          Dato un numero fisso di punti luce (Particles) e un insieme di pareti
+          (Boundaries), un algoritmo genetico stabilisce la posizione più idonea
+          affinché i primi riescano a coprire - mediante la luce irradiata da
+          essi - la maggior parte dell'area messa a disposizione. Si assume che
+          la scena visualizzata sia un proiezione bidimensionale dello spazio,
+          vista dall'alto.
+        </p>
+        <table id="ga-details" class="is-small">
+          <tbody>
+            <tr>
+              <th>N° punti luce</th>
+              <td id="num_punti_luce"></td>
+            </tr>
+            <tr>
+              <th>N° pareti</th>
+              <td id="num_boundaries"></td>
+            </tr>
+            <tr>
+              <th>Dist recettori</th>
+              <td id="dist_detectors"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4>Comandi da tastiera</h4>
+        <div id="keyboard-shortcuts">
+          <div class="keyboard-shortcut">
+            <span class="key-cmd"><kbd>g</kbd></span>
+            <span class="is-small"
+              >Attiva/disattiva griglia recettori<br /><small
+                >Aumentare la densità della griglia di recettori riduce
+                notevolmente le prestazioni dell'algoritmo</small
+              ></span
+            >
+          </div>
+          <div class="keyboard-shortcut">
+            <span class="key-cmd"><kbd>+</kbd> / <kbd>-</kbd></span>
+            <span class="is-small">Aumenta/riduci recettori</span>
+          </div>
+          <div class="keyboard-shortcut">
+            <span class="key-cmd"><kbd>n</kbd></span>
+            <span class="is-small">Nuova configurazione</span>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <small>Simone Cernuschi - Maggio 2021</small>
+      </footer>
+    </aside>
+    <main>
+      <div id="canvas-container"></div>
+      <div id="stats"></div>
+    </main>
+  </body>
+</html>
