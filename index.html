@@ -88,9 +88,21 @@
         align-items: flex-start;
       }
       #scroll-explaination {
+        position: relative;
         flex: 1;
         overflow-y: auto;
       }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+        opacity: 0;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 255, 255, 0.3);
+        border-radius: 3px;
+      }
+
       .footer {
         margin-top: 1rem;
         border-top: 1px solid rgba(0, 255, 255, 0.3);
@@ -100,6 +112,10 @@
         justify-content: center;
         align-items: center;
         color: rgba(0, 255, 255, 0.3);
+      }
+
+      #keyboard-shortcuts-container {
+        border-top: 1px solid rgba(0, 255, 255, 0.5);
       }
     </style>
     <link
@@ -145,22 +161,78 @@
             </tr>
           </tbody>
         </table>
+        <h3>Calcolo della funzione di fitness</h3>
+        <p class="is-small">
+          Per il calcolo della fitness di ogni individuo, vengono eseguiti i
+          seguenti passaggi:
+        </p>
+        <ol class="is-small">
+          <li>Viene generata la lista di recettori</li>
+          <li>
+            Per ogni recettore, viene costruita una lista di liste, contenente
+            le intersezioni con tutti i punti luce presenti (una lista di
+            intersezioni per ogni punto luce)
+          </li>
+          <li>
+            Per ogni recettore, se la lista di liste generata al punto
+            precedente contiene almeno una lista vuota, vuol dire che il
+            recettore è raggiunto senza incontrare ostacoli da un punto luce,
+            altrimenti si trova al buio
+          </li>
+        </ol>
+        <p class="is-small">
+          Il valore di fitness corrisponde al conteggio dei recettori raggiunti
+          da almeno un punto luce. L'obiettivo è massimizzare questo valore.
+        </p>
+        <h3>Mutazione</h3>
+        <p class="is-small">
+          Se, in seguito all'applicazione dell'operatore di crossover a due
+          genitori, un individuo figlio subisce una mutazione, questa non
+          consiste nella rigenerazione totalmente casuale di un insieme di punti
+          luce, ma nella ridisposizione locale di quelli posseduti in
+          precedenza. Con la locuzione "ridisposizione locale" intendo che le
+          nuove posizioni dei punti luce vengono generate sì casualmente, ma
+          tenendo conto della posizione assunta da essi precedentemente.
+          Infatti, la nuova posizione cade entro un'area delimitata da un
+          cerchio avente un raggio di misura prestabilita, e centro
+          corrispondente alla precedente posizione.
+        </p>
+        <h3>Criteri di arresto</h3>
+        <p class="is-small">
+          La copertura raggiunta equivale al 100% dei recettori oppure la
+          percentuale della deviazione standard della fitness degli ultimi
+          <i>n</i> individui migliori rispetto al numero totale di recettori è
+          <&nbsp;0.1%.
+        </p>
+        <h3>Future implementazioni</h3>
+        <ul class="is-small">
+          <li>Estendere a 3 dimensioni</li>
+          <li>
+            Invece di avere un numero fisso di punti luce, cercare la miglior
+            configurazione che consenta di ottenere la massima copertura con il
+            minor numero di punti luce
+          </li>
+          <li>
+            Conferire ai recettori delle priorità, in modo tale da poter
+            stabilire aree più importanti di altre da dover illuminare
+          </li>
+        </ul>
       </div>
-      <div>
+      <div id="keyboard-shortcuts-container">
         <h4>Comandi da tastiera</h4>
         <div id="keyboard-shortcuts">
           <div class="keyboard-shortcut">
             <span class="key-cmd"><kbd>g</kbd></span>
+            <span class="is-small">Attiva/disattiva griglia recettori</span>
+          </div>
+          <div class="keyboard-shortcut">
+            <span class="key-cmd"><kbd>+</kbd> / <kbd>-</kbd></span>
             <span class="is-small"
-              >Attiva/disattiva griglia recettori<br /><small
+              >Aumenta/riduci recettori<br /><small
                 >Aumentare la densità della griglia di recettori riduce
                 notevolmente le prestazioni dell'algoritmo</small
               ></span
             >
-          </div>
-          <div class="keyboard-shortcut">
-            <span class="key-cmd"><kbd>+</kbd> / <kbd>-</kbd></span>
-            <span class="is-small">Aumenta/riduci recettori</span>
           </div>
           <div class="keyboard-shortcut">
             <span class="key-cmd"><kbd>n</kbd></span>

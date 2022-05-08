@@ -1,5 +1,5 @@
 class Individual {
-  static NUM_PARTICLES = 2
+  static NUM_PARTICLES = 3
   static MUTATION_GAP = 100
   static DETECTOR_GAP = 20
 

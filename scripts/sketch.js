@@ -5,7 +5,7 @@ const MAX_DISTANCE = Infinity
 let ga
 let stats
 let fitnessChart
-let isDrawingGrid = true
+let isDrawingGrid = false
 
 function setup() {
   const parent = document.querySelector('main')
@@ -59,7 +59,7 @@ function keyTyped() {
 }
 
 const createBuilding = boundaries => {
-  const NUM_BOUNDARIES = 4
+  const NUM_BOUNDARIES = 6
   while (boundaries.length < NUM_BOUNDARIES) {
     let new_boundary = new Boundary(
       random(width),
